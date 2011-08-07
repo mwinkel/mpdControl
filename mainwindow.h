@@ -29,10 +29,8 @@ public:
 private slots:
     void updateTitle();
     void saveSettings();
-
     void on_options_connect_and_save_clicked();
 
-    void on_tabWidget_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;

@@ -24,7 +24,6 @@ class MpdManager : public QObject
         void setVolume(int volume);
         QString getCurrentSong();
         void getCurrentVolume();
-        QString getPlaylist();
 
     private slots:
         void send_command(QString cmd);

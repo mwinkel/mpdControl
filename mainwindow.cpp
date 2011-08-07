@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString mpd_host = settings.value("host").toString();
 
     // default values
-    if (mpd_port == NULL){ mpd_port = 6600; }
+    if (mpd_port == 0){ mpd_port = 6600; }
     if (mpd_host == NULL){ mpd_host = "localhost"; }
 
     this->ui->options_host->setText(mpd_host);
@@ -142,14 +142,4 @@ void MainWindow::on_options_connect_and_save_clicked()
     this->saveSettings();
     // TODO
     mpdmanager->mpdConnect(ui->options_host->text(),ui->options_port->text().toInt());
-}
-
-void MainWindow::on_tabWidget_currentChanged(int index)
-{
-    if (index==1){
-        // reload playlist
-
-        QString tmp = mpdmanager->getPlaylist();
-        std::cout << "playlist: " << qPrintable(tmp) << std::endl;
-    }
 }

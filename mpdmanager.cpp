@@ -94,27 +94,6 @@ void MpdManager::getCurrentVolume(){
     emit volChanged(vol);
 }
 
-QString MpdManager::getPlaylist(){
-    QTextStream os(mpd_socket);
-    os.flush();
-    os << tr("command_list_ok_begin") << "\n";
-    os << tr("playlistinfo") << "\n";
-    os << tr("command_list_end") << "\n";
-    os.flush();
-
-    QString result = "";
-    int ok = 0;
-    QString line;
-    do {
-        line = os.readLine();
-        if(line.startsWith("file")){
-            result += line + "\n";
-        }
-    } while (!line.isNull());
-
-    return result;
-}
-
 void MpdManager::send_command(QString cmd){
     QTextStream os(mpd_socket);
     os.flush();
