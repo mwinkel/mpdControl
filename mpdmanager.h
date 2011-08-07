@@ -2,6 +2,7 @@
 #define MPDMANAGER_H
 
 #include <QTcpSocket>
+#include <QStringList>
 //#include <Qt/qtcpsocket.h>
 
 class MpdManager : public QObject
@@ -22,8 +23,10 @@ class MpdManager : public QObject
         void next();
         void previous();
         void setVolume(int volume);
-        QString getCurrentSong();
+        void getCurrentSong();
+        void getPlaylist();
         void getCurrentVolume();
+        void readServerResponse();
 
     private slots:
         void send_command(QString cmd);
@@ -33,6 +36,8 @@ class MpdManager : public QObject
 
     signals:
         void volChanged(int);
+        void songUpdate(QString);
+        void playlistUpdate(QStringList);
 };
 
 #endif // MPDMANAGER_H

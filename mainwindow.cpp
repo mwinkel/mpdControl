@@ -8,6 +8,8 @@
 #include <QSettings>
 
 
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -51,6 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     mpdmanager = new MpdManager();
     mpdmanager->mpdConnect(mpd_host, mpd_port);
+    connect(mpdmanager, SIGNAL(songUpdate(QString)), this, SLOT(updateTitle(QString)));
+    connect(mpdmanager, SIGNAL(playlistUpdate(QStringList)), this, SLOT(updatePlaylist(QStringList)));
     connect(mpdmanager, SIGNAL(volChanged(int)), this->ui->volumeSlider, SLOT(setValue(int)));
     connect(ui->btnConnect, SIGNAL(clicked()), mpdmanager, SLOT(toggelPause()));
     connect(ui->btnPlay, SIGNAL(clicked()), mpdmanager, SLOT(start()));
@@ -59,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnPrevious, SIGNAL(clicked()), mpdmanager, SLOT(previous()));
     connect(ui->volumeSlider, SIGNAL(valueChanged(int)), mpdmanager, SLOT(setVolume(int)));
     QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateTitle()));
+    connect(timer, SIGNAL(timeout()), mpdmanager, SLOT(getCurrentSong()));
     timer->start(1000);
 }
 
@@ -124,8 +128,17 @@ void MainWindow::showExpanded()
 #endif
 }
 
-void MainWindow::updateTitle(){
-   ui->label->setText(mpdmanager->getCurrentSong());
+void MainWindow::updateTitle(QString songTitle){
+    ui->label->setText(songTitle);
+}
+
+// TODO
+void MainWindow::updatePlaylist(QStringList playlist){
+    ui->listWidget_playlist->clear();
+
+    for (int i = 0; i < playlist.size(); ++i)
+              ui->listWidget_playlist->addItem(playlist.at(i));
+
 }
 
 void MainWindow::saveSettings(){
@@ -142,4 +155,10 @@ void MainWindow::on_options_connect_and_save_clicked()
     this->saveSettings();
     // TODO
     mpdmanager->mpdConnect(ui->options_host->text(),ui->options_port->text().toInt());
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    if (index==1)
+        mpdmanager->getPlaylist();
 }

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QtGui/QMainWindow>
+#include <QStringList>
 #include "mpdmanager.h"
 
 namespace Ui {
@@ -27,10 +28,13 @@ public:
     void showExpanded();
 
 private slots:
-    void updateTitle();
+    void updateTitle(QString songTitle);
+    void updatePlaylist(QStringList playlist);
     void saveSettings();
     void on_options_connect_and_save_clicked();
 
+
+    void on_tabWidget_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;
