@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.1
+Type=Application
+Terminal=false
+Name=mpdcontrol
+Exec=/opt/mpdcontrol/bin/mpdcontrol
+Icon=mpdcontrol
+X-Window-Icon=
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
