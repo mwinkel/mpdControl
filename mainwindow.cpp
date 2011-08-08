@@ -36,8 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mpdmanager, SIGNAL(songUpdate(QString,QString)), this, SLOT(updateTitle(QString,QString)));
     connect(mpdmanager, SIGNAL(playlistUpdate(QList<MpdPlaylistEntry*>)), this, SLOT(updatePlaylist(QList<MpdPlaylistEntry*>)));
     connect(mpdmanager, SIGNAL(volChanged(int)), this->ui->volumeSlider, SLOT(setValue(int)));
-    connect(ui->btnConnect, SIGNAL(clicked()), mpdmanager, SLOT(toggelPause()));
-    connect(ui->btnPlay, SIGNAL(clicked()), mpdmanager, SLOT(start()));
+    connect(ui->btnPlayPause, SIGNAL(clicked()), mpdmanager, SLOT(toggelPause()));
     connect(ui->btnStop, SIGNAL(clicked()), mpdmanager, SLOT(stop()));
     connect(ui->btnNext, SIGNAL(clicked()), mpdmanager, SLOT(next()));
     connect(ui->btnPrevious, SIGNAL(clicked()), mpdmanager, SLOT(previous()));
@@ -111,7 +110,11 @@ void MainWindow::showExpanded()
 }
 
 void MainWindow::updateTitle(QString state, QString songTitle){
-    ui->label_state->setText(state);
+    if (state == "play")
+        this->ui->btnPlayPause->setText("Pause");
+    else
+        this->ui->btnPlayPause->setText("Play");
+
     ui->label_currentsong->setText(songTitle);
 }
 

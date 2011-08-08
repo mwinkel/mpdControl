@@ -8,12 +8,15 @@
 
 enum
 {
-     UNKNOWN = 0,
-     CONNECT = 1,
-     DISCONNECT = 2,
-     PARSE_PLAYLIST = 3,
-     PARSE_STATUS = 4,
-     PARSE_CURRENTSONG = 5
+    UNKNOWN = 0,
+    CONNECT = 1,
+    DISCONNECT = 2,
+    PARSE_PLAYLIST = 3,
+    PARSE_STATUS = 4,
+    PARSE_CURRENTSONG = 5,
+    PAUSED = 6,
+    PLAYING = 7,
+    STOPPED = 8
 };
 
 class MpdManager : public QObject
@@ -29,7 +32,7 @@ class MpdManager : public QObject
 
     public slots:
         void toggelPause();
-        void start();
+//        void start();
         void play(int songpos);
         void stop();
         void next();
@@ -46,6 +49,7 @@ class MpdManager : public QObject
     private:
         QTcpSocket *mpd_socket;
         int mpd_state;
+        int mpd_play_state;
 
     signals:
         void volChanged(int);

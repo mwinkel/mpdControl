@@ -8,6 +8,7 @@ MpdManager::MpdManager()
 {
     mpd_socket = NULL;
     mpd_state = UNKNOWN;
+    mpd_play_state = UNKNOWN;
 }
 
 
@@ -34,12 +35,11 @@ void MpdManager::mpdDisconnect(){
 
 void MpdManager::toggelPause(){
     mpd_state = PARSE_CURRENTSONG;
-    send_command("pause");
-}
 
-void MpdManager::start(){
-    mpd_state = PARSE_CURRENTSONG;
-    send_command("play");
+    if (mpd_play_state == STOPPED)
+        send_command("play");
+    else
+        send_command("pause");
 }
 
 void MpdManager::play(int songpos){
@@ -144,13 +144,19 @@ void MpdManager::readServerResponse(){
             if (line.contains("state: "))
                 state = line.replace("state: ", "");
         }
-
-    } while(!line.isNull());
+    } while( !line.isNull() );
 
     if ( mpd_state == PARSE_CURRENTSONG &&
          (!artist.isEmpty() || !title.isEmpty() || !name.isEmpty()) ){
-        // TODO
-        emit songUpdate("[" + state + "]", artist + " - " + title + " (" + name + ")");
+
+        if (state == "play")
+            mpd_play_state = PLAYING;
+        else if (state == "pause")
+            mpd_play_state = PAUSED;
+        else if (state == "stop")
+            mpd_play_state = STOPPED;
+
+        emit songUpdate(state, artist + " - " + title + " (" + name + ")");
     }
 
 
