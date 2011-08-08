@@ -30,7 +30,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="tabShape">
-       <enum>QTabWidget::Triangular</enum>
+       <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -162,7 +162,7 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>9999</width>
               <height>65</height>
              </size>
             </property>
@@ -194,7 +194,7 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>9999</width>
               <height>65</height>
              </size>
             </property>
