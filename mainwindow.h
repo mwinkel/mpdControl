@@ -29,7 +29,7 @@ public:
     void showExpanded();
 
 private slots:
-    void updateTitle(QString songTitle);
+    void updateTitle(QString state, QString songTitle);
     void updatePlaylist(QList<MpdPlaylistEntry*> playlist);
     void saveSettings();
     void on_options_connect_and_save_clicked();

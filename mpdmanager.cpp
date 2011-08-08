@@ -149,7 +149,8 @@ void MpdManager::readServerResponse(){
 
     if ( mpd_state == PARSE_CURRENTSONG &&
          (!artist.isEmpty() || !title.isEmpty() || !name.isEmpty()) ){
-        emit songUpdate("[" + state + "]" + artist + " - " + title + " (" + name + ")");
+        // TODO
+        emit songUpdate("[" + state + "]", artist + " - " + title + " (" + name + ")");
     }
 
 
