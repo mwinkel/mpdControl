@@ -19,6 +19,7 @@ void MpdManager::mpdConnect(QString host, int port){
     connect(mpd_socket, SIGNAL(readyRead()), this, SLOT(readServerResponse()));
     mpd_socket->connectToHost(host, port);
 
+    // TODO: geht das noch hübscher?
     QTimer *timer = new QTimer(this);
     timer->singleShot(2000, this, SLOT(getCurrentVolume()));
 }
@@ -82,7 +83,7 @@ void MpdManager::readServerResponse(){
     QString title = "";
     QString artist = "";
 
-    // TODO
+    // TODO: song klasse oder sowas mit title, id/songpos
     QStringList files;
 
     do {
@@ -94,7 +95,6 @@ void MpdManager::readServerResponse(){
 
         if (line.startsWith("volume:")){
             int volume = line.replace("volume: ", "").toInt();
-            std::cout << "Volume: " << volume << std::endl;
             emit volChanged(volume);
         }
 
@@ -111,10 +111,8 @@ void MpdManager::readServerResponse(){
         emit songUpdate(artist + " - " + title + " (" + name + ")");
 
 
-    if ( files.length() > 1 ){
-        std::cout << "emit files" << std::endl;
+    if ( files.length() > 1 )
         emit playlistUpdate(files);
-    }
 }
 
 

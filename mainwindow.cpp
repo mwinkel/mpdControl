@@ -156,7 +156,6 @@ void MainWindow::on_options_connect_and_save_clicked()
     // TODO
     mpdmanager->mpdConnect(ui->options_host->text(),ui->options_port->text().toInt());
 }
-
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
     if (index==1)
