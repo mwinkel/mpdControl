@@ -2,7 +2,7 @@
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">0</value>
+  <value type="int">1</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -82,7 +82,7 @@
     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString"></value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">0</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/home/marcel/Projekte/mpdcontrol-build-simulator</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/home/marcel/Projekte/mpdcontrol-build-remote</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">2</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="QString">ProjectExplorer.ToolChain.Gcc:/usr/bin/g++.x86-linux-generic-elf-64bit.</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
@@ -212,10 +212,10 @@
       <value key="RemoteCompiler.BuildStep.CertKeyFile" type="QString"></value>
       <value key="RemoteCompiler.BuildStep.CertKeyPass" type="QString"></value>
       <value key="RemoteCompiler.BuildStep.PkgOpt" type="int">0</value>
-      <value key="RemoteCompiler.BuildStep.PostOp" type="int">1</value>
+      <value key="RemoteCompiler.BuildStep.PostOp" type="int">2</value>
       <value key="RemoteCompiler.BuildStep.QtVersion" type="QString">4_7_2_m1_1_1</value>
       <value key="RemoteCompiler.BuildStep.SisOpt" type="int">0</value>
-      <value key="RemoteCompiler.BuildStep.Target" type="QString">s60_5_0</value>
+      <value key="RemoteCompiler.BuildStep.Target" type="QString">s60_3_1</value>
      </valuemap>
      <value key="ProjectExplorer.BuildStepList.StepsCount" type="int">1</value>
      <value key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName" type="QString">Build</value>
