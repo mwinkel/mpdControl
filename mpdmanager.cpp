@@ -54,7 +54,7 @@ void MpdManager::setVolume(int volume){
 }
 
 void MpdManager::getCurrentSong(){
-    send_command("currentsong");
+    send_command("status\ncurrentsong");
 }
 
 void MpdManager::getPlaylist(){
