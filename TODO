@@ -1,4 +1,6 @@
 
+- on playlist click -> switch song (songid, pos)
+- on startup -> volume detection
 
 
 #####################################

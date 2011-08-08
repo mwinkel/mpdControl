@@ -3,7 +3,18 @@
 
 #include <QTcpSocket>
 #include <QStringList>
-//#include <Qt/qtcpsocket.h>
+
+#include "mpdplaylistentry.h"
+
+enum
+{
+     UNKNOWN = 0,
+     CONNECT = 1,
+     DISCONNECT = 2,
+     PARSE_PLAYLIST = 3,
+     PARSE_STATUS = 4,
+     PARSE_CURRENTSONG = 5
+};
 
 class MpdManager : public QObject
 {
@@ -33,11 +44,12 @@ class MpdManager : public QObject
 
     private:
         QTcpSocket *mpd_socket;
+        int mpd_state;
 
     signals:
         void volChanged(int);
         void songUpdate(QString);
-        void playlistUpdate(QStringList);
+        void playlistUpdate(QList<MpdPlaylistEntry*>);
 };
 
 #endif // MPDMANAGER_H

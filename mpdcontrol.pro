@@ -23,9 +23,11 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # MOBILITY +=
 
 SOURCES += main.cpp mainwindow.cpp \
-    mpdmanager.cpp
+    mpdmanager.cpp \
+    mpdplaylistentry.cpp
 HEADERS += mainwindow.h \
-    mpdmanager.h
+    mpdmanager.h \
+    mpdplaylistentry.h
 FORMS += mainwindow.ui
 
 QT += network

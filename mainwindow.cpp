@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     mpdmanager = new MpdManager();
     mpdmanager->mpdConnect(mpd_host, mpd_port);
     connect(mpdmanager, SIGNAL(songUpdate(QString)), this, SLOT(updateTitle(QString)));
-    connect(mpdmanager, SIGNAL(playlistUpdate(QStringList)), this, SLOT(updatePlaylist(QStringList)));
+    connect(mpdmanager, SIGNAL(playlistUpdate(QList<MpdPlaylistEntry*>)), this, SLOT(updatePlaylist(QList<MpdPlaylistEntry*>)));
     connect(mpdmanager, SIGNAL(volChanged(int)), this->ui->volumeSlider, SLOT(setValue(int)));
     connect(ui->btnConnect, SIGNAL(clicked()), mpdmanager, SLOT(toggelPause()));
     connect(ui->btnPlay, SIGNAL(clicked()), mpdmanager, SLOT(start()));
@@ -133,12 +133,12 @@ void MainWindow::updateTitle(QString songTitle){
 }
 
 // TODO
-void MainWindow::updatePlaylist(QStringList playlist){
+void MainWindow::updatePlaylist(QList<MpdPlaylistEntry*> playlist){
     ui->listWidget_playlist->clear();
 
-    for (int i = 0; i < playlist.size(); ++i)
-              ui->listWidget_playlist->addItem(playlist.at(i));
-
+    for (int i = 0; i < playlist.size(); ++i){
+        ui->listWidget_playlist->addItem(playlist.at(i)->title);
+    }
 }
 
 void MainWindow::saveSettings(){
