@@ -15,27 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    m_pMenu = new QMenu(this);
-//    m_pMenu->addAction("Example", this, SLOT(exampleSlot()));
 
-    // Create Options CBA
-    QAction *pOptions = new QAction("Options", this);
-    // Set defined menu into Options button
-    pOptions->setMenu(m_pMenu);
-    pOptions->setSoftKeyRole(QAction::PositiveSoftKey);
-    addAction(pOptions);
-
-    // Create Exit CBA
-    QAction *pExitButton = new QAction(QString("Exit"), this);
-    pExitButton->setSoftKeyRole(QAction::NegativeSoftKey);
-    // Exit button closes the application
-    QObject::connect(pExitButton, SIGNAL(triggered()),
-    QApplication::instance(), SLOT(quit()));
-    addAction(pExitButton);
-
-
-    QCoreApplication::setOrganizationName("-foo-");
-//    QCoreApplication::setOrganizationDomain("www._noch_leer_.com");
+    QCoreApplication::setOrganizationName("foo");
     QCoreApplication::setApplicationName("mpdControl");
     QSettings settings;
 
