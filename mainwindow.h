@@ -3,6 +3,7 @@
 
 #include <QtGui/QMainWindow>
 #include <QStringList>
+#include <QListWidgetItem>
 #include "mpdmanager.h"
 
 namespace Ui {
@@ -32,6 +33,7 @@ private slots:
     void updatePlaylist(QList<MpdPlaylistEntry*> playlist);
     void saveSettings();
     void on_options_connect_and_save_clicked();
+    void playlistEntryClicked(QListWidgetItem* item);
 
 
     void on_tabWidget_currentChanged(int index);

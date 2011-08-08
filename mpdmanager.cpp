@@ -42,6 +42,11 @@ void MpdManager::start(){
     send_command("play");
 }
 
+void MpdManager::play(int songpos){
+    mpd_state = PARSE_CURRENTSONG;
+    send_command("play " + QString::number(songpos));
+}
+
 void MpdManager::stop(){
     mpd_state = PARSE_CURRENTSONG;
     send_command("stop");

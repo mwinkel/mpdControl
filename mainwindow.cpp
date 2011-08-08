@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->ui->options_host->setText(mpd_host);
     this->ui->options_port->setText(QString::number(mpd_port));
 
-
     mpdmanager = new MpdManager();
     mpdmanager->mpdConnect(mpd_host, mpd_port);
     connect(mpdmanager, SIGNAL(songUpdate(QString)), this, SLOT(updateTitle(QString)));
@@ -65,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), mpdmanager, SLOT(getCurrentSong()));
     timer->start(1000);
+
+    connect(this->ui->listWidget_playlist, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(playlistEntryClicked(QListWidgetItem*)));
 }
 
 MainWindow::~MainWindow()
@@ -132,12 +133,15 @@ void MainWindow::updateTitle(QString songTitle){
     ui->label->setText(songTitle);
 }
 
-// TODO
 void MainWindow::updatePlaylist(QList<MpdPlaylistEntry*> playlist){
     ui->listWidget_playlist->clear();
 
     for (int i = 0; i < playlist.size(); ++i){
-        ui->listWidget_playlist->addItem(playlist.at(i)->title);
+        QListWidgetItem *item = new QListWidgetItem(ui->listWidget_playlist);
+        item->setData(Qt::DisplayRole, playlist.at(i)->title);
+        item->setData(Qt::UserRole + 1, playlist.at(i)->pos);
+
+        ui->listWidget_playlist->addItem(item);
     }
 }
 
@@ -160,4 +164,11 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 {
     if (index==1)
         mpdmanager->getPlaylist();
+}
+
+void MainWindow::playlistEntryClicked(QListWidgetItem* item){
+    if (item != NULL){
+        int songpos = item->data(Qt::UserRole + 1).toInt();
+        mpdmanager->play(songpos);
+    }
 }

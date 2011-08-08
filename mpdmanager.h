@@ -30,6 +30,7 @@ class MpdManager : public QObject
     public slots:
         void toggelPause();
         void start();
+        void play(int songpos);
         void stop();
         void next();
         void previous();
