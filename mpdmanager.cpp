@@ -23,7 +23,7 @@ void MpdManager::mpdConnect(QString host, int port){
 
     // TODO: geht das noch hübscher?
     QTimer *timer = new QTimer(this);
-    timer->singleShot(500, this, SLOT(getCurrentVolume()));
+    timer->singleShot(1500, this, SLOT(getCurrentVolume()));
 }
 
 void MpdManager::mpdDisconnect(){
@@ -154,7 +154,6 @@ void MpdManager::readServerResponse(){
 
 
     if ( mpd_state == PARSE_PLAYLIST && playlist.length() > 0){
-        std::cout << "parse playlist" << std::endl;
         emit playlistUpdate(playlist);
     }
 
