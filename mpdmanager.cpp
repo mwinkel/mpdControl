@@ -82,6 +82,7 @@ void MpdManager::readServerResponse(){
     QString name = "";
     QString title = "";
     QString artist = "";
+    QString state = "";
 
     // TODO: song klasse oder sowas mit title, id/songpos
     QStringList files;
@@ -104,11 +105,14 @@ void MpdManager::readServerResponse(){
             title = line.replace("Title: ", "");
         if (line.contains("Artist: "))
             artist = line.replace("Artist: ", "");
+        if (line.contains("state: "))
+            state = line.replace("state: ", "");
+
 
     } while(!line.isNull());
 
     if ( !name.isEmpty() || !title.isEmpty() || !artist.isEmpty() )
-        emit songUpdate(artist + " - " + title + " (" + name + ")");
+        emit songUpdate("[" + state + "]" + artist + " - " + title + " (" + name + ")");
 
 
     if ( files.length() > 1 )
