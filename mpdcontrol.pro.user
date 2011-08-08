@@ -2,7 +2,7 @@
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">1</value>
+  <value type="int">0</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -214,8 +214,8 @@
       <value key="RemoteCompiler.BuildStep.PkgOpt" type="int">0</value>
       <value key="RemoteCompiler.BuildStep.PostOp" type="int">2</value>
       <value key="RemoteCompiler.BuildStep.QtVersion" type="QString">4_7_2_m1_1_1</value>
-      <value key="RemoteCompiler.BuildStep.SisOpt" type="int">0</value>
-      <value key="RemoteCompiler.BuildStep.Target" type="QString">s60_3_1</value>
+      <value key="RemoteCompiler.BuildStep.SisOpt" type="int">1</value>
+      <value key="RemoteCompiler.BuildStep.Target" type="QString">s60_3_2</value>
      </valuemap>
      <value key="ProjectExplorer.BuildStepList.StepsCount" type="int">1</value>
      <value key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName" type="QString">Build</value>
