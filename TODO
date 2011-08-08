@@ -1,0 +1,68 @@
+
+
+
+#####################################
+#									#
+#			MPD Response 			#
+#									#
+#####################################
+
+Send: "status"
+
+--> (volume, playlistlength, state, (next)song(id))
+
+volume: 41
+repeat: 0
+random: 0
+single: 0
+consume: 0
+playlist: 637
+playlistlength: 6
+xfade: 0
+mixrampdb: 0.000000
+mixrampdelay: nan
+state: stop
+song: 0
+songid: 118
+nextsong: 1
+nextsongid: 119
+list_OK
+
+
+Send: "currentsong":
+
+--> (file, title, name, pos, id)
+
+file: http://gffstream.etc....
+Title: Hoo...title...
+Name: Name...etc....
+Pos: 0
+Id: 118
+list_OK
+OK
+
+
+Send: "playlistinfo"
+
+--> (file, pos, id)
+
+file: http://gffstream.ic.llnwd.net/stream/gffstream_stream_wdr_einslive_a
+Title: Hoobastank mit If i were you
+Name: 1LIVE, © Westdeutscher Rundfunk Köln 2011
+Pos: 0
+Id: 118
+file: http://gffstream.ic.llnwd.net/stream/gffstream_einslive_a
+Title: 1LIVE diggi mit Neutron star collision von Muse 
+Name: 1LIVE diggi, © Westdeutscher Rundfunk Köln 2011
+Pos: 1
+Id: 119
+file: http://c22033-l.i.core.cdn.streamfarm.net/22004mdrjump/live/3087mdr_jump/live_de_128.mp3
+Name: MDR Jump
+Pos: 2
+Id: 120
+file: http://listen.to.techno4ever.net/dsl/mp3
+Pos: 3
+Id: 121
+list_OK
+OK
+
