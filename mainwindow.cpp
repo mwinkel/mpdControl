@@ -7,6 +7,8 @@
 #include <QTimer>
 #include <QSettings>
 
+#include <QFontMetrics>
+#include <QDesktopWidget>
 
 
 
@@ -33,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mpdmanager = new MpdManager();
     mpdmanager->mpdConnect(mpd_host, mpd_port);
-    connect(mpdmanager, SIGNAL(songUpdate(QString,QString)), this, SLOT(updateTitle(QString,QString)));
+    connect(mpdmanager, SIGNAL(songUpdate(QString, QString, QString, QString)), this, SLOT(updateSong(QString, QString, QString, QString)));
     connect(mpdmanager, SIGNAL(playlistUpdate(QList<MpdPlaylistEntry*>)), this, SLOT(updatePlaylist(QList<MpdPlaylistEntry*>)));
     connect(mpdmanager, SIGNAL(volChanged(int)), this->ui->volumeSlider, SLOT(setValue(int)));
     connect(ui->btnPlayPause, SIGNAL(clicked()), mpdmanager, SLOT(toggelPause()));
@@ -109,13 +111,37 @@ void MainWindow::showExpanded()
 #endif
 }
 
-void MainWindow::updateTitle(QString state, QString songTitle){
+void MainWindow::updateSong(QString state, QString songArtist, QString songTitle, QString songName){
     if (state == "play")
         this->ui->btnPlayPause->setText("Pause");
     else
         this->ui->btnPlayPause->setText("Play");
 
-    ui->label_currentsong->setText(songTitle);
+    // QLabel breaks layout:
+    //      [done] elide text
+    //      [todo] scroll text?!
+
+    QDesktopWidget* desktopWidget = QApplication::desktop();
+    QRect clientRect = desktopWidget->availableGeometry();
+
+    QFont font = ui->label_artist->font();
+    QFontMetrics fm(font);
+
+    songArtist.isEmpty() ?
+        ui->label_artist->setVisible(false) :
+        ui->label_artist->setVisible(true);
+
+    songTitle.isEmpty() ?
+        ui->label_title->setVisible(false) :
+        ui->label_title->setVisible(true);
+
+    songName.isEmpty() ?
+        ui->label_name->setVisible(false) :
+        ui->label_name->setVisible(true);
+
+    ui->label_artist->setText(fm.elidedText(songArtist, Qt::ElideRight, clientRect.width() - 10));
+    ui->label_title->setText(fm.elidedText(songTitle, Qt::ElideRight, clientRect.width() - 10));
+    ui->label_name->setText(fm.elidedText(songName, Qt::ElideRight, clientRect.width() - 10));
 }
 
 void MainWindow::updatePlaylist(QList<MpdPlaylistEntry*> playlist){

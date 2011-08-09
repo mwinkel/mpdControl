@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow;
     mainWindow.setOrientation(MainWindow::ScreenOrientationAuto);
+//    mainWindow.setOrientation(MainWindow::ScreenOrientationLockPortrait);
     mainWindow.showMaximized();
 
     return app.exec();

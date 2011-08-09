@@ -108,6 +108,7 @@ void MpdManager::readServerResponse(){
 
     do {
         line = in.readLine();
+//        std::cout << qPrintable(line) << std::endl;
 
         if (mpd_state == PARSE_STATUS){
             if (line.startsWith("volume:")){
@@ -144,7 +145,10 @@ void MpdManager::readServerResponse(){
             if (line.contains("state: "))
                 state = line.replace("state: ", "");
         }
-    } while( !line.isNull() );
+    } while( !line.isNull() ||
+             !line.compare("ok", Qt::CaseInsensitive) ||
+             !line.compare("list_ok", Qt::CaseInsensitive)
+           );
 
     if ( mpd_state == PARSE_CURRENTSONG &&
          (!artist.isEmpty() || !title.isEmpty() || !name.isEmpty()) ){
@@ -156,7 +160,7 @@ void MpdManager::readServerResponse(){
         else if (state == "stop")
             mpd_play_state = STOPPED;
 
-        emit songUpdate(state, artist + " - " + title + " (" + name + ")");
+        emit songUpdate(state, artist, title, name);
     }
 
 

@@ -53,7 +53,7 @@ class MpdManager : public QObject
 
     signals:
         void volChanged(int);
-        void songUpdate(QString, QString);
+        void songUpdate(QString, QString, QString, QString);
         void playlistUpdate(QList<MpdPlaylistEntry*>);
 };
 
